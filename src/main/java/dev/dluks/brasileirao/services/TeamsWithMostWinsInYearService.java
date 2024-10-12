@@ -1,7 +1,7 @@
 package dev.dluks.brasileirao.services;
 
-import dev.dluks.brasileirao.dtos.TeamWithMostWinsDTO;
-import dev.dluks.brasileirao.dtos.TeamsWithMostWinsInResponseDTO;
+import dev.dluks.brasileirao.dtos.team.TeamWithMostWins;
+import dev.dluks.brasileirao.dtos.team.TeamsWithMostWinsInResponseDTO;
 import dev.dluks.brasileirao.entities.Match;
 import dev.dluks.brasileirao.exceptions.InvalidYearException;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ public class TeamsWithMostWinsInYearService {
             throw new InvalidYearException("O ano deve estar entre 2003 e 2023.");
         }
 
-        List<TeamWithMostWinsDTO> teams;
+        List<TeamWithMostWins> teams;
         try (Stream<String> lines = Files.lines(Paths.get(FILE_PATH))) {
 
             Map<String, Long> winsByTeam = lines.skip(1)
@@ -42,7 +42,7 @@ public class TeamsWithMostWinsInYearService {
 
             teams = winsByTeam.entrySet().stream()
                     .filter(entry -> entry.getValue() == maxWins)
-                    .map(entry -> new TeamWithMostWinsDTO(entry.getKey(), entry.getValue().intValue()))
+                    .map(entry -> new TeamWithMostWins(entry.getKey(), entry.getValue().intValue()))
                     .toList();
 
         } catch (IOException e) {

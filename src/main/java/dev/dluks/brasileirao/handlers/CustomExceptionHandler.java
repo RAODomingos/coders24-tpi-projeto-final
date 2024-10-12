@@ -1,6 +1,6 @@
 package dev.dluks.brasileirao.handlers;
 
-import dev.dluks.brasileirao.dtos.CustomErrorResponse;
+import dev.dluks.brasileirao.dtos.response.CustomErrorResponse;
 import dev.dluks.brasileirao.exceptions.InvalidYearException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;

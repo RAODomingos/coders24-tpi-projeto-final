@@ -1,9 +1,9 @@
-package dev.dluks.brasileirao.dtos;
+package dev.dluks.brasileirao.dtos.team;
 
 import java.util.List;
 
 public record TeamsWithMostWinsInResponseDTO(
         int ano,
-        List<TeamWithMostWinsDTO> times
+        List<TeamWithMostWins> times
 ) {
 }
