@@ -1,7 +1,7 @@
 package dev.dluks.brasileirao.services;
 
-import dev.dluks.brasileirao.dtos.StateWithFewestGamesDTO;
-import dev.dluks.brasileirao.dtos.StateWithFewestGamesResponseDTO;
+import dev.dluks.brasileirao.dtos.state.StateWithFewestGames;
+import dev.dluks.brasileirao.dtos.state.StatesWithFewestGamesResponseDTO;
 import dev.dluks.brasileirao.entities.Match;
 
 import java.io.IOException;
@@ -20,7 +20,7 @@ public class StatesWithFewestGamesBetweenYearsService {
     private StatesWithFewestGamesBetweenYearsService() {
     }
 
-    public static StateWithFewestGamesResponseDTO execute(String sYear, String eYear) {
+    public static StatesWithFewestGamesResponseDTO execute(String sYear, String eYear) {
         int startYear;
         int endYear;
 
@@ -62,16 +62,16 @@ public class StatesWithFewestGamesBetweenYearsService {
                     .min(Long::compareTo)
                     .orElse(0L);
 
-            List<StateWithFewestGamesDTO> stateWithFewestGames = gamesByState.entrySet().stream()
+            List<StateWithFewestGames> stateWithFewestGames = gamesByState.entrySet().stream()
                     .filter(entry -> entry.getValue() == minGames)
-                    .map(entry -> new StateWithFewestGamesDTO(entry.getKey(), entry.getValue().intValue()))
+                    .map(entry -> new StateWithFewestGames(entry.getKey(), entry.getValue().intValue()))
                     .toList();
 
             Map<String, Integer> period = new HashMap<>();
-            period.put("startYear", finalStartYear);
-            period.put("endYear", finalEndYear);
+            period.put("anoInicio", finalStartYear);
+            period.put("anoFim", finalEndYear);
 
-            return new StateWithFewestGamesResponseDTO(period, stateWithFewestGames);
+            return new StatesWithFewestGamesResponseDTO(period, stateWithFewestGames);
 
         } catch (IOException e) {
             e.printStackTrace();

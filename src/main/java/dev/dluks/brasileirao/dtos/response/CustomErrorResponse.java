@@ -1,4 +1,4 @@
-package dev.dluks.brasileirao.dtos;
+package dev.dluks.brasileirao.dtos.response;
 
 import java.time.Instant;
 
