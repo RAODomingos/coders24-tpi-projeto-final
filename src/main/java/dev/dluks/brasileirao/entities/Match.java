@@ -24,6 +24,7 @@ public class Match {
     private final int visitorTeamScore;
     private final String homeTeamState;
     private final String visitorTeamState;
+    private final int totalScore;
 
     public Match(String[] data) {
         this.id = Integer.parseInt(data[0].replace("\"", ""));
@@ -44,6 +45,8 @@ public class Match {
         this.visitorTeamScore = Integer.parseInt(data[13].replace("\"", ""));
         this.homeTeamState = data[14].replace("\"", "");
         this.visitorTeamState = data[15].replace("\"", "");
+
+        this.totalScore = this.homeTeamScore + this.visitorTeamScore;
     }
 
     public int getId() {
@@ -108,6 +111,10 @@ public class Match {
 
     public String getVisitorTeamState() {
         return visitorTeamState;
+    }
+
+    public int getTotalScore(){
+        return totalScore;
     }
 
     @Override
