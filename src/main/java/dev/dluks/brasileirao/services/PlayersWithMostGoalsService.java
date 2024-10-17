@@ -39,7 +39,35 @@ public class PlayersWithMostGoalsService {
             return null;
         }
 
-        return new PlayersWithMostGoalsResponseDTO(players);
+        return new PlayersWithMostGoalsResponseDTO("Mais Gols",players);
+    }
+
+    public static PlayersWithMostGoalsResponseDTO execute(String typeGoals) {
+
+        List<PlayerWithMostGoals> players;
+        try (Stream<String> lines = Files.lines(Paths.get(FILE_PATH))) {
+
+            var playersWithMostGoals = lines.skip(1)
+                    .map(line -> new Goal(line.split(",")))
+                    .filter(goal -> goal.getTypeGoal().equalsIgnoreCase(typeGoals))
+                    .collect(Collectors.groupingBy(Goal::getAthlete, Collectors.counting()));
+
+            long maxGoals = playersWithMostGoals.values().stream()
+                    .max(Long::compareTo)
+                    .orElse(0L);
+
+            players = playersWithMostGoals.entrySet().stream()
+                    .filter(entry -> entry.getValue() == maxGoals)
+                    .map(entry -> new PlayerWithMostGoals(entry.getKey(), entry.getValue().intValue()))
+                    .toList();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return new PlayersWithMostGoalsResponseDTO(typeGoals, players);
     }
 
 }
