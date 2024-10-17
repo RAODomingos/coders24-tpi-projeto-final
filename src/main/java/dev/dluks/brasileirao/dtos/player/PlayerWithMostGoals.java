@@ -13,15 +13,8 @@ public class PlayerWithMostGoals {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public Integer getGols() {
         return gols;
     }
 
-    public void setGols(Integer gols) {
-        this.gols = gols;
-    }
-}
+  }
