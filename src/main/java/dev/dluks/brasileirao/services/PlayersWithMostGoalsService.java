@@ -49,7 +49,7 @@ public class PlayersWithMostGoalsService {
 
             var playersWithMostGoals = lines.skip(1)
                     .map(line -> new Goal(line.split(",")))
-                    .filter(goal -> goal.getTypeGoal().equalsIgnoreCase(typeGoals))
+                    .filter(goal -> goal.getTypeGoal().equalsIgnoreCase(""))
                     .collect(Collectors.groupingBy(Goal::getAthlete, Collectors.counting()));
 
             long maxGoals = playersWithMostGoals.values().stream()
