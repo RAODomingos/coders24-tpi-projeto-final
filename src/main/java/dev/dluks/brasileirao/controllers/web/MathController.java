@@ -13,12 +13,12 @@ import java.util.List;
 public class MathController {
 
     @GetMapping("/most-wins")
-    public String showMostWinsForm(@RequestParam(value = "year", required = false) Integer year, Model model) {
+    public String showMostWinsForm(@RequestParam(value = "year", required = false) String year, Model model) {
         if (year != null) {
 
             TeamsWithMostWinsInResponseDTO result = TeamsWithMostWinsInYearService.execute(year);
 
-            if(result == null) {
+            if (result == null) {
                 model.addAttribute("error", "An error occurred while fetching the data");
                 return "most-wins-form";
             }

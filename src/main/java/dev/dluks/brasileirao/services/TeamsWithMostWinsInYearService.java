@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -22,36 +23,62 @@ public class TeamsWithMostWinsInYearService {
 
     private static final String FILE_PATH = "src/main/resources/dataset/campeonato-brasileiro-full.csv";
 
-    public static TeamsWithMostWinsInResponseDTO execute(int year) {
-        if (year < 2003 || year > 2023) {
+    public static TeamsWithMostWinsInResponseDTO execute() {
+        return execute("");
+    }
+
+    public static TeamsWithMostWinsInResponseDTO execute(String year) {
+        Optional<Integer> optionalYear = parseYear(year);
+
+        if (optionalYear.isPresent() &&
+                (optionalYear.get() < 2003 || optionalYear.get() > 2023)
+        ) {
             throw new InvalidYearException("O ano deve estar entre 2003 e 2023.");
         }
 
-        List<TeamWithMostWins> teams;
         try (Stream<String> lines = Files.lines(Paths.get(FILE_PATH))) {
 
             Map<String, Long> winsByTeam = lines.skip(1)
                     .map(line -> new Match(line.split(",")))
-                    .filter(match -> match.getDate().getYear() == year)
+                    .filter(match ->
+                            optionalYear.isEmpty() ||
+                                    match.getDate().getYear() == optionalYear.get())
                     .filter(match -> !match.getWinner().equals("-"))
                     .collect(Collectors.groupingBy(Match::getWinner, Collectors.counting()));
 
-            long maxWins = winsByTeam.values().stream()
-                    .max(Long::compareTo)
-                    .orElse(0L);
-
-            teams = winsByTeam.entrySet().stream()
-                    .filter(entry -> entry.getValue() == maxWins)
+            List<TeamWithMostWins> teams = winsByTeam.entrySet().stream()
                     .map(entry -> new TeamWithMostWins(entry.getKey(), entry.getValue().intValue()))
+                    .sorted((team1, team2) -> team2.vitorias().compareTo(team1.vitorias()))
                     .toList();
 
+            if (optionalYear.isPresent()) {
+                long maxWins = winsByTeam.values().stream()
+                        .max(Long::compareTo)
+                        .orElse(0L);
+
+                teams = teams.stream()
+                        .filter(team -> team.vitorias() == maxWins)
+                        .toList();
+            }
+
+            return new TeamsWithMostWinsInResponseDTO(
+                    optionalYear.orElse(0),
+                    teams);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
+    }
 
-        return new TeamsWithMostWinsInResponseDTO(year, teams);
-
+    private static Optional<Integer> parseYear(String year) {
+        if (year == null || year.isBlank()) {
+            return Optional.empty();
+        }
+        try {
+            return Optional.of(Integer.parseInt(year));
+        } catch (NumberFormatException e) {
+            throw new InvalidYearException("O ano deve ser um número inteiro entre 2003 e 2023.");
+        }
     }
 
 }
