@@ -6,14 +6,16 @@ public class CustomErrorResponse {
     private Instant timestamp;
     private String error;
     private String path;
+    private Integer status;
 
     public CustomErrorResponse() {
     }
 
-    public CustomErrorResponse(Instant timestamp, String error, String path) {
+    public CustomErrorResponse(Instant timestamp, String error, String path, Integer status) {
         this.timestamp = timestamp;
         this.error = error;
         this.path = path;
+        this.status = status;
     }
 
     public Instant getTimestamp() {
@@ -39,4 +41,8 @@ public class CustomErrorResponse {
     public void setPath(String path) {
         this.path = path;
     }
+
+    public Integer getStatus() {return status;}
+
+    public void setStatus(Integer status) {this.status = status;}
 }

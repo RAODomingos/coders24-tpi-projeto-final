@@ -1,6 +1,7 @@
 package dev.dluks.brasileirao.handlers;
 
 import dev.dluks.brasileirao.dtos.response.CustomErrorResponse;
+import dev.dluks.brasileirao.exceptions.InvalidGoalTypeException;
 import dev.dluks.brasileirao.exceptions.InvalidYearException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -18,12 +19,46 @@ public class CustomExceptionHandler {
             InvalidYearException e,
             HttpServletRequest request) {
 
+        HttpStatus status = HttpStatus.BAD_REQUEST;
         CustomErrorResponse error = new CustomErrorResponse(
                 Instant.now(),
                 e.getMessage(),
-                request.getRequestURI()
+                request.getRequestURI(),
+                status.value()
         );
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+        return ResponseEntity.status(status).body(error);
+
     }
 
+   @ExceptionHandler(InvalidGoalTypeException.class)
+    public ResponseEntity<CustomErrorResponse> handleInvalidGoalTypeException(
+            InvalidGoalTypeException e,
+            HttpServletRequest request) {
+
+    HttpStatus status = HttpStatus.BAD_REQUEST;
+        CustomErrorResponse error = new CustomErrorResponse(
+                Instant.now(),
+                e.getMessage(),
+                request.getRequestURI(),
+                status.value()
+        );
+        return ResponseEntity.status(status).body(error);
+
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<CustomErrorResponse> handleException(
+            Exception e,
+            HttpServletRequest request) {
+
+        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+        CustomErrorResponse error = new CustomErrorResponse(
+                Instant.now(),
+                e.getMessage(),
+                request.getRequestURI(),
+                status.value()
+        );
+        return ResponseEntity.status(status).body(error);
+
+    }
 }

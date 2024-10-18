@@ -3,6 +3,7 @@ package dev.dluks.brasileirao.services;
 import dev.dluks.brasileirao.dtos.player.PlayerWithMostGoals;
 import dev.dluks.brasileirao.dtos.player.PlayersWithMostGoalsResponseDTO;
 import dev.dluks.brasileirao.entities.Goal;
+import dev.dluks.brasileirao.exceptions.InvalidGoalTypeException;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -43,13 +44,26 @@ public class PlayersWithMostGoalsService {
     }
 
     public static PlayersWithMostGoalsResponseDTO execute(String typeGoals) {
+        if(!typeGoals.equalsIgnoreCase("contra") && !typeGoals.equalsIgnoreCase("penalti")){
+            throw new InvalidGoalTypeException("Utilize 'contra' para Gol Contra e 'penalti' para Penalty");
+        }
+
+        if(typeGoals.equalsIgnoreCase("contra")){
+            typeGoals = "Gol Contra";
+        }
+        if(typeGoals.equalsIgnoreCase("penalti")){
+            typeGoals = "Penalty";
+        }
+
+
+
 
         List<PlayerWithMostGoals> players;
         try (Stream<String> lines = Files.lines(Paths.get(FILE_PATH))) {
-
+            String query = typeGoals;
             var playersWithMostGoals = lines.skip(1)
                     .map(line -> new Goal(line.split(",")))
-                    .filter(goal -> goal.getTypeGoal().equalsIgnoreCase(""))
+                    .filter(goal -> goal.getTypeGoal().equalsIgnoreCase(query))
                     .collect(Collectors.groupingBy(Goal::getAthlete, Collectors.counting()));
 
             long maxGoals = playersWithMostGoals.values().stream()
