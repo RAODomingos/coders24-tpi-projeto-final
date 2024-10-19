@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/jogadores")
 public class GoalsController {
 
+
     @GetMapping("/mais-gols")
-    public ResponseEntity<PlayersWithMostGoalsResponseDTO> getPlayersWithMostGoals() {
-      PlayersWithMostGoalsResponseDTO result = PlayersWithMostGoalsService.execute();
+    public ResponseEntity<PlayersWithMostGoalsResponseDTO> getPlayersWithMostGoals(){
+        PlayersWithMostGoalsResponseDTO result = PlayersWithMostGoalsService.execute("todos");
         return ResponseEntity.ok(result);
     }
-
 
     @GetMapping("/mais-gols/{typeGoals}")
     public ResponseEntity<PlayersWithMostGoalsResponseDTO> getPlayersWithMostGoals(@PathVariable String typeGoals){
