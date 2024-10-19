@@ -16,36 +16,9 @@ public class PlayersWithMostGoalsService {
 
     private static final String FILE_PATH = "src/main/resources/dataset/campeonato-brasileiro-gols.csv";
 
-    public static PlayersWithMostGoalsResponseDTO execute() {
-
-        List<PlayerWithMostGoals> players;
-        try (Stream<String> lines = Files.lines(Paths.get(FILE_PATH))) {
-
-            var playersWithMostGoals = lines.skip(1)
-                    .map(line -> new Goal(line.split(",")))
-                    .collect(Collectors.groupingBy(Goal::getAthlete, Collectors.counting()));
-
-            long maxGoals = playersWithMostGoals.values().stream()
-                    .max(Long::compareTo)
-                    .orElse(0L);
-
-            players = playersWithMostGoals.entrySet().stream()
-                    .filter(entry -> entry.getValue() == maxGoals)
-                    .map(entry -> new PlayerWithMostGoals(entry.getKey(), entry.getValue().intValue()))
-                    .toList();
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        return new PlayersWithMostGoalsResponseDTO("Mais Gols",players);
-    }
-
     public static PlayersWithMostGoalsResponseDTO execute(String typeGoals) {
-        if(!typeGoals.equalsIgnoreCase("contra") && !typeGoals.equalsIgnoreCase("penalti")){
-            throw new InvalidGoalTypeException("Utilize 'contra' para Gol Contra e 'penalti' para Penalty");
+        if(!typeGoals.equalsIgnoreCase("contra") && !typeGoals.equalsIgnoreCase("penalti") && !typeGoals.equalsIgnoreCase("todos")){
+            throw new InvalidGoalTypeException("Utilize 'contra' para Gol Contra e 'penalti' para Penalty ou 'todos' para todos os tipos de gols");
         }
 
         if(typeGoals.equalsIgnoreCase("contra")){
@@ -56,14 +29,12 @@ public class PlayersWithMostGoalsService {
         }
 
 
-
-
         List<PlayerWithMostGoals> players;
         try (Stream<String> lines = Files.lines(Paths.get(FILE_PATH))) {
             String query = typeGoals;
             var playersWithMostGoals = lines.skip(1)
                     .map(line -> new Goal(line.split(",")))
-                    .filter(goal -> goal.getTypeGoal().equalsIgnoreCase(query))
+                    .filter(goal -> query.equalsIgnoreCase("todos") || goal.getTypeGoal().equalsIgnoreCase(query))
                     .collect(Collectors.groupingBy(Goal::getAthlete, Collectors.counting()));
 
             long maxGoals = playersWithMostGoals.values().stream()
