@@ -3,6 +3,7 @@ package dev.dluks.brasileirao.services;
 import dev.dluks.brasileirao.dtos.state.StateWithFewestGames;
 import dev.dluks.brasileirao.dtos.state.StatesWithFewestGamesResponseDTO;
 import dev.dluks.brasileirao.entities.Match;
+import dev.dluks.brasileirao.exceptions.InvalidYearException;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,6 +11,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -21,38 +23,29 @@ public class StatesWithFewestGamesBetweenYearsService {
     }
 
     public static StatesWithFewestGamesResponseDTO execute(String sYear, String eYear) {
-        int startYear;
-        int endYear;
 
-        try {
-            startYear = Integer.parseInt(sYear);
-        } catch (NumberFormatException e) {
-            startYear = 2003;
+        Optional<Integer> startYear = parseYear(sYear);
+        Optional<Integer> endYear = parseYear(eYear);
+
+        if (startYear.isEmpty() || endYear.isEmpty()) {
+            throw new InvalidYearException("Os anos de início e fim são obrigatórios");
         }
 
-        try {
-            endYear = Integer.parseInt(eYear);
-        } catch (NumberFormatException e) {
-            endYear = 2023;
+        if (startYear.get() < 2003 || startYear.get() > 2023) {
+            throw new InvalidYearException("O ano de início deve estar entre 2003 e 2023");
+        }
+        if (endYear.get() < 2003 || endYear.get() > 2023) {
+            throw new InvalidYearException("O ano de fim deve estar entre 2003 e 2023");
         }
 
-        if (startYear < 2003 || startYear > 2023) {
-            startYear = 2003;
+        if (endYear.get() < startYear.get()) {
+            throw new InvalidYearException("O ano de fim deve ser maior que o ano de início");
         }
-        if (endYear < 2003 || endYear > 2023) {
-            endYear = 2023;
-        }
-
-        if (endYear < startYear) {
-            int temp = startYear;
-            startYear = endYear;
-            endYear = temp;
-        }
-
-        int finalStartYear = startYear;
-        int finalEndYear = endYear;
 
         try (Stream<String> lines = Files.lines(Paths.get(FILE_PATH))) {
+            Integer finalStartYear = startYear.get();
+            Integer finalEndYear = endYear.get();
+
             Map<String, Long> gamesByState = lines.skip(1)
                     .map(line -> new Match(line.split(",")))
                     .filter(match -> match.getDate().getYear() >= finalStartYear && match.getDate().getYear() <= finalEndYear)
@@ -79,4 +72,15 @@ public class StatesWithFewestGamesBetweenYearsService {
         }
     }
 
+    private static Optional<Integer> parseYear(String year) {
+        if (year == null || year.isBlank()) {
+            return Optional.empty();
+        }
+
+        try {
+            return Optional.of(Integer.parseInt(year));
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(String.format("O ano %s é inválido", year));
+        }
+    }
 }

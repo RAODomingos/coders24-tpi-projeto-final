@@ -13,8 +13,8 @@ public class StateController {
 
     @GetMapping()
     public StatesWithFewestGamesResponseDTO getStatesWithFewestGamesBetweenYears(
-            @RequestParam(name = "anoInicio", defaultValue = "2003") String startYear,
-            @RequestParam(name = "anoFim", defaultValue = "2023") String endYear
+            @RequestParam(name = "anoInicio", defaultValue = "") String startYear,
+            @RequestParam(name = "anoFim", defaultValue = "") String endYear
     ) {
 
         return StatesWithFewestGamesBetweenYearsService.execute(startYear, endYear);
