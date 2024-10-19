@@ -3,6 +3,7 @@ package dev.dluks.brasileirao.services;
 import dev.dluks.brasileirao.dtos.player.PlayersWithMostCards;
 import dev.dluks.brasileirao.dtos.player.PlayersWithMostCardsResponseDTO;
 import dev.dluks.brasileirao.entities.Card;
+import dev.dluks.brasileirao.exceptions.InvalidCardExpception;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,6 +19,9 @@ public class PlayersWithMostCardsService {
     private static final String FILE_PATH = "src/main/resources/dataset/campeonato-brasileiro-cartoes.csv";
 
     public static PlayersWithMostCardsResponseDTO execute(String colorCard) {
+        if(!colorCard.equalsIgnoreCase("vermelho") && !colorCard.equalsIgnoreCase("amarelo")){
+            throw new InvalidCardExpception("O Cartão deve ser 'vermelho' ou 'amarelo'");
+        }
 
         List<PlayersWithMostCards> players = new ArrayList<>();
         try(Stream<String> lines = Files.lines(Paths.get(FILE_PATH))) {

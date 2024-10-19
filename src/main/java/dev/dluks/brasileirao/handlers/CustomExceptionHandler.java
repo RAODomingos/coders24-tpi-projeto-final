@@ -1,6 +1,7 @@
 package dev.dluks.brasileirao.handlers;
 
 import dev.dluks.brasileirao.dtos.response.CustomErrorResponse;
+import dev.dluks.brasileirao.exceptions.InvalidCardExpception;
 import dev.dluks.brasileirao.exceptions.InvalidGoalTypeException;
 import dev.dluks.brasileirao.exceptions.InvalidYearException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -45,6 +46,23 @@ public class CustomExceptionHandler {
         return ResponseEntity.status(status).body(error);
 
     }
+
+    @ExceptionHandler(InvalidCardExpception.class)
+    public ResponseEntity<CustomErrorResponse> handleInvalidCardExpception(
+            InvalidCardExpception e,
+            HttpServletRequest request) {
+
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        CustomErrorResponse error = new CustomErrorResponse(
+                Instant.now(),
+                e.getMessage(),
+                request.getRequestURI(),
+                status.value()
+        );
+        return ResponseEntity.status(status).body(error);
+
+    }
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<CustomErrorResponse> handleException(
