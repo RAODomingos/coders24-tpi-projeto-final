@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CardsController {
 
     @GetMapping("/mais-cartoes/{colorCard}")
-    public ResponseEntity<PlayersWithMostCardsResponseDTO> getPlayersWithMostYellowCards(@PathVariable String colorCard) {
+    public ResponseEntity<PlayersWithMostCardsResponseDTO> getPlayersWithMostCards(@PathVariable String colorCard) {
         PlayersWithMostCardsResponseDTO result = PlayersWithMostCardsService.execute(colorCard);
         return ResponseEntity.ok(result);
     }
