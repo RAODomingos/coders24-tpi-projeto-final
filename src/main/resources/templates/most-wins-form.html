@@ -9,7 +9,7 @@
 <div class="container">
     <h1>Selecione o ano para ver o time com mais vitórias</h1>
 
-    <form th:action="@{/most-wins}" method="get">
+    <form th:action="@{/web/jogos/vitorias}" method="get">
         <label for="year">Ano:</label>
         <select id="year" name="year" onchange="this.form.submit()">
             <option value="" disabled selected>Selecione um ano</option>
