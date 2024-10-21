@@ -17,6 +17,9 @@ import java.util.stream.Stream;
 
 public class PlayersWithMostCardsService {
 
+    private PlayersWithMostCardsService() {
+    }
+
     private static final String FILE_PATH = "src/main/resources/dataset/campeonato-brasileiro-cartoes.csv";
 
     public static PlayersWithMostCardsResponseDTO execute(String colorCard) {

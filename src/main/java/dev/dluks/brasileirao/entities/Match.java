@@ -5,8 +5,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Match {
-    // Header do csv de entrada
-    // "ID","rodata","data","hora","mandante","visitante","formacao_mandante","formacao_visitante","tecnico_mandante","tecnico_visitante","vencedor","arena","mandante_Placar","visitante_Placar","mandante_Estado","visitante_Estado"
 
     private final int id;
     private final String round;

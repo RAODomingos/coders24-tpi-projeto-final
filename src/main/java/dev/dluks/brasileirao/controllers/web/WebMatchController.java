@@ -1,7 +1,7 @@
 package dev.dluks.brasileirao.controllers.web;
 
-import dev.dluks.brasileirao.dtos.game.MatchsWithHighestScoreResponseDTO;
-import dev.dluks.brasileirao.services.MatchsWithHighestScoreService;
+import dev.dluks.brasileirao.dtos.game.MatchesWithHighestScoreResponseDTO;
+import dev.dluks.brasileirao.services.MatchesWithHighestScoreService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +16,7 @@ public class WebMatchController {
     public String showMostWinsForm(@RequestParam(value = "year", required = false) String year, Model model) {
         if (year != null) {
 
-            MatchsWithHighestScoreResponseDTO result = MatchsWithHighestScoreService.execute(year);
+            MatchesWithHighestScoreResponseDTO result = MatchesWithHighestScoreService.execute(year);
 
             if (result == null) {
                 model.addAttribute("error", "An error occurred while fetching the data");
