@@ -10,17 +10,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-public class MathController {
+public class WebTeamController {
 
-    @GetMapping("/most-wins")
+    @GetMapping("/web/times/mais-vitorias")
     public String showMostWinsForm(@RequestParam(value = "year", required = false) String year, Model model) {
         if (year != null) {
-
             TeamsWithMostWinsInResponseDTO result = TeamsWithMostWinsInYearService.execute(year);
 
             if (result == null) {
                 model.addAttribute("error", "An error occurred while fetching the data");
-                return "most-wins-form";
+                return "maisvitorias";
             }
 
             List<Object[]> results = result.times().stream()
@@ -30,7 +29,7 @@ public class MathController {
             model.addAttribute("results", results);
             model.addAttribute("selectedYear", year);
         }
-        return "most-wins-form"; // Renderiza a mesma página com ou sem resultados
+        return "maisvitorias";
     }
 
 }

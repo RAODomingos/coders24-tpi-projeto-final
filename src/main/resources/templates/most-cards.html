@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Consulta de Goleadores</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="container">
+  <h1>Jogadores com Mais Gols</h1>
+
+  <form th:action="@{/web/jogadores/mais-cartoes-old}" method="get">
+    <label for="type">Selecione o Tipo de Cartão:</label>
+    <select id="type" name="type" onchange="this.form.submit()">
+      <option value="" disabled selected>Selecione</option>
+      <option value="vermelho" th:selected="${type == 'vermelho'}">Vermelho</option>
+      <option value="amarelo" th:selected="${type == 'amarelo'}">Amarelo</option>
+        <button type="submit">Consultar</button>
+      </select>
+  </form>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Nome do Jogador</th>
+      <th>Cartões</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="player : ${results}">
+         <td th:text="${player[0]}"></td>
+      <td th:text="${player[1]}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

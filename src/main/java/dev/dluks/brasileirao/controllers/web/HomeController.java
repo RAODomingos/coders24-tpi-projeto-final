@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-    @GetMapping("/")
+    @GetMapping("/web")
     public String homePage(Model model) {
         model.addAttribute("message", "Welcome to Brasileirão API");
-        return "home";
+        return "index";
     }
 }
+

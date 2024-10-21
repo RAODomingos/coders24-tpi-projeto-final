@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.time.Instant;
+import java.util.logging.Logger;
 
 @RestControllerAdvice
 public class CustomExceptionHandler {
+
+    Logger logger = Logger.getLogger(CustomExceptionHandler.class.getName());
 
     @ExceptionHandler(InvalidYearException.class)
     public ResponseEntity<CustomErrorResponse> handleInvalidYearException(
@@ -76,6 +79,9 @@ public class CustomExceptionHandler {
                 request.getRequestURI(),
                 status.value()
         );
+
+        logger.severe(e.getMessage());
+
         return ResponseEntity.status(status).body(error);
 
     }

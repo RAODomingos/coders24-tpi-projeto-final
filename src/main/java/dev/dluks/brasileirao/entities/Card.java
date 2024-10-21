@@ -12,14 +12,14 @@ public class Card {
     private final String minute;
 
     public Card(String[] data) {
-        this.matchId = Integer.parseInt(data[0].replace("\"", ""));
-        this.round = data[1].replace("\"", "");
-        this.team = data[2].replace("\"", "");
-        this.card = data[3].replace("\"", "");
-        this.athlete = data[4].replace("\"", "");
-        this.shirtNumber = data[5].replace("\"", "");
-        this.position = data[6].replace("\"", "");
-        this.minute = data[7].replace("\"", "");
+        this.matchId = Integer.parseInt(data[0]);
+        this.round = data[1];
+        this.team = data[2];
+        this.card = data[3];
+        this.athlete = data[4];
+        this.shirtNumber = data[5];
+        this.position = data[6];
+        this.minute = data[7];
     }
 
     public int getMatchId() {

@@ -4,6 +4,7 @@ import dev.dluks.brasileirao.dtos.player.PlayerWithMostGoals;
 import dev.dluks.brasileirao.dtos.player.PlayersWithMostGoalsResponseDTO;
 import dev.dluks.brasileirao.entities.Goal;
 import dev.dluks.brasileirao.exceptions.InvalidGoalTypeException;
+import dev.dluks.brasileirao.utils.SanitizeHelper;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,14 +18,14 @@ public class PlayersWithMostGoalsService {
     private static final String FILE_PATH = "src/main/resources/dataset/campeonato-brasileiro-gols.csv";
 
     public static PlayersWithMostGoalsResponseDTO execute(String typeGoals) {
-        if(!typeGoals.equalsIgnoreCase("contra") && !typeGoals.equalsIgnoreCase("penalti") && !typeGoals.equalsIgnoreCase("todos")){
+        if (!typeGoals.equalsIgnoreCase("contra") && !typeGoals.equalsIgnoreCase("penalti") && !typeGoals.equalsIgnoreCase("todos")) {
             throw new InvalidGoalTypeException("Utilize 'contra' para Gol Contra e 'penalti' para Penalty ou 'todos' para todos os tipos de gols");
         }
 
-        if(typeGoals.equalsIgnoreCase("contra")){
+        if (typeGoals.equalsIgnoreCase("contra")) {
             typeGoals = "Gol Contra";
         }
-        if(typeGoals.equalsIgnoreCase("penalti")){
+        if (typeGoals.equalsIgnoreCase("penalti")) {
             typeGoals = "Penalty";
         }
 
@@ -33,7 +34,7 @@ public class PlayersWithMostGoalsService {
         try (Stream<String> lines = Files.lines(Paths.get(FILE_PATH))) {
             String query = typeGoals;
             var playersWithMostGoals = lines.skip(1)
-                    .map(line -> new Goal(line.split(",")))
+                    .map(line -> new Goal(SanitizeHelper.sanitize(line.split(","))))
                     .filter(goal -> query.equalsIgnoreCase("todos") || goal.getTypeGoal().equalsIgnoreCase(query))
                     .collect(Collectors.groupingBy(Goal::getAthlete, Collectors.counting()));
 

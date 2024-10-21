@@ -4,6 +4,7 @@ import dev.dluks.brasileirao.dtos.game.MatchsWithHighestScore;
 import dev.dluks.brasileirao.dtos.game.MatchsWithHighestScoreResponseDTO;
 import dev.dluks.brasileirao.entities.Match;
 import dev.dluks.brasileirao.exceptions.InvalidYearException;
+import dev.dluks.brasileirao.utils.SanitizeHelper;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -23,15 +24,15 @@ public class MatchsWithHighestScoreService {
         Optional<Integer> optionalYear = parseYear(year);
 
         List<MatchsWithHighestScore> matchs = new ArrayList<>();
-        try(Stream<String> lines = Files.lines(Paths.get(FILE_PATH))) {
+        try (Stream<String> lines = Files.lines(Paths.get(FILE_PATH))) {
 
             Map<Integer, List<Match>> matchsPerTotalScore = lines.skip(1)
-                    .map(line -> new Match(line.split(",")))
-                    .filter(match -> {
-                        return optionalYear
-                                .map(integer -> match.getDate().getYear() == integer)
-                                .orElse(true);
-                    })
+                    .map(line -> new Match(SanitizeHelper.sanitize(line.split(","))))
+                    .filter(match ->
+                            optionalYear
+                                    .map(integer -> match.getDate().getYear() == integer)
+                                    .orElse(true)
+                    )
                     .collect(Collectors.groupingBy(Match::getTotalScore));
 
             var maxTotalScore = matchsPerTotalScore.keySet().stream()

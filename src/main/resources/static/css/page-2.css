@@ -1,0 +1,142 @@
+ .u-section-1 {
+  min-height: 581px;
+}
+
+.u-section-1 .u-image-1 {
+  min-height: 582px;
+  height: auto;
+  background-image: url("../images/fundo.jpg");
+  background-position: 50% 50%;
+  margin-top: -1px;
+  margin-bottom: 0;
+}
+
+.u-section-1 .u-container-layout-1 {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.u-section-1 .u-group-2 {
+  width: 1001px;
+  height: auto;
+  background-image: none;
+  min-height: 482px;
+  margin: 52px auto 0;
+}
+
+.u-section-1 .u-container-layout-2 {
+  padding: 16px 30px;
+}
+
+.u-section-1 .u-text-1 {
+  text-transform: uppercase;
+  width: 533px;
+  margin: 97px auto 0;
+}
+
+.u-section-1 .u-text-2 {
+  font-size: 4.5rem;
+  margin: 52px 106px 0;
+}
+
+.u-section-1 .u-text-3 {
+  width: 680px;
+  margin: 46px 131px 0;
+}
+
+@media (max-width: 1199px) {
+  .u-section-1 .u-image-1 {
+    height: auto;
+  }
+
+  .u-section-1 .u-group-2 {
+    width: 940px;
+    height: auto;
+  }
+
+  .u-section-1 .u-text-1 {
+    margin-left: 249px;
+    margin-right: 249px;
+  }
+
+  .u-section-1 .u-text-2 {
+    margin-left: 76px;
+    margin-right: 76px;
+  }
+
+  .u-section-1 .u-text-3 {
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+}
+
+@media (max-width: 991px) {
+  .u-section-1 .u-group-2 {
+    width: 720px;
+  }
+
+  .u-section-1 .u-text-1 {
+    margin-left: 187px;
+    margin-right: 187px;
+  }
+
+  .u-section-1 .u-text-2 {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .u-section-1 .u-text-3 {
+    width: 660px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .u-section-1 .u-group-2 {
+    width: 540px;
+  }
+
+  .u-section-1 .u-container-layout-2 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .u-section-1 .u-text-1 {
+    margin-left: 38px;
+    margin-right: 38px;
+    width: 520px;
+  }
+
+  .u-section-1 .u-text-2 {
+    font-size: 2.25rem;
+    margin-left: 106px;
+    margin-right: 106px;
+  }
+
+  .u-section-1 .u-text-3 {
+    width: 520px;
+  }
+}
+
+@media (max-width: 575px) {
+  .u-section-1 .u-group-2 {
+    width: 340px;
+  }
+
+  .u-section-1 .u-text-1 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 320px;
+  }
+
+  .u-section-1 .u-text-2 {
+    font-size: 1.875rem;
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+
+  .u-section-1 .u-text-3 {
+    width: 320px;
+  }
+}
