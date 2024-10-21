@@ -20,7 +20,7 @@ public class WebMatchController {
 
             if (result == null) {
                 model.addAttribute("error", "An error occurred while fetching the data");
-                return "maiorplacar";
+                return "maior-placar";
             }
 
             List<Object[]> results = result.partidasComMaiorPlacar().stream()
@@ -38,7 +38,7 @@ public class WebMatchController {
             model.addAttribute("results", results);
             model.addAttribute("selectedYear", year);
         }
-        return "maiorplacar";
+        return "maior-placar";
     }
 
 }

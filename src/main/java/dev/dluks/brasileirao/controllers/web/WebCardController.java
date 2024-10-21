@@ -1,9 +1,7 @@
 package dev.dluks.brasileirao.controllers.web;
 
 import dev.dluks.brasileirao.dtos.player.PlayersWithMostCardsResponseDTO;
-import dev.dluks.brasileirao.dtos.player.PlayersWithMostGoalsResponseDTO;
 import dev.dluks.brasileirao.services.PlayersWithMostCardsService;
-import dev.dluks.brasileirao.services.PlayersWithMostGoalsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +20,7 @@ public class WebCardController {
 
             if (result == null) {
                 model.addAttribute("error", "An error occurred while fetching the data");
-                return "maiscartoes";
+                return "mais-cartoes";
             }
 
             List<Object[]> results = result.jogadoresComMaisCartoes().stream()
@@ -32,7 +30,7 @@ public class WebCardController {
             model.addAttribute("results", results);
             model.addAttribute("type", type);
         }
-        return "maiscartoes";
+        return "mais-cartoes";
     }
 
 }
