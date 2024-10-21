@@ -32,7 +32,7 @@ public class WebCardController {
             model.addAttribute("results", results);
             model.addAttribute("type", type);
         }
-        return "maiscartoes"; // Renderiza a mesma página com ou sem resultados
+        return "maiscartoes";
     }
 
 }

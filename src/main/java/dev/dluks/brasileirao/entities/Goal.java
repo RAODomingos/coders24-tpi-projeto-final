@@ -10,12 +10,12 @@ public class Goal {
     private final String typeOfGoal;
 
     public Goal(String[] data) {
-        this.matchId = Integer.parseInt(data[0].replace("\"", ""));
-        this.round = data[1].replace("\"", "");
-        this.team = data[2].replace("\"", "");
-        this.athlete = data[3].replace("\"", "");
-        this.minute = data[4].replace("\"", "");
-        this.typeOfGoal = data[5].replace("\"", "");
+        this.matchId = Integer.parseInt(data[0]);
+        this.round = data[1];
+        this.team = data[2];
+        this.athlete = data[3];
+        this.minute = data[4];
+        this.typeOfGoal = data[5];
     }
 
     public int getMatchId() {

@@ -4,6 +4,7 @@ import dev.dluks.brasileirao.dtos.state.StateWithFewestGames;
 import dev.dluks.brasileirao.dtos.state.StatesWithFewestGamesResponseDTO;
 import dev.dluks.brasileirao.entities.Match;
 import dev.dluks.brasileirao.exceptions.InvalidYearException;
+import dev.dluks.brasileirao.utils.SanitizeHelper;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -47,7 +48,7 @@ public class StatesWithFewestGamesBetweenYearsService {
             Integer finalEndYear = endYear.get();
 
             Map<String, Long> gamesByState = lines.skip(1)
-                    .map(line -> new Match(line.split(",")))
+                    .map(line -> new Match(SanitizeHelper.sanitize(line.split(","))))
                     .filter(match -> match.getDate().getYear() >= finalStartYear && match.getDate().getYear() <= finalEndYear)
                     .collect(Collectors.groupingBy(Match::getHomeTeamState, Collectors.counting()));
 

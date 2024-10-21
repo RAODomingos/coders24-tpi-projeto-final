@@ -27,24 +27,24 @@ public class Match {
     private final int totalScore;
 
     public Match(String[] data) {
-        this.id = Integer.parseInt(data[0].replace("\"", ""));
-        this.round = data[1].replace("\"", "");
+        this.id = Integer.parseInt(data[0]);
+        this.round = data[1];
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        this.date = LocalDate.parse(data[2].replace("\"", ""), formatter);
-        this.time = LocalTime.parse(data[3].replace("\"", ""));
-        this.homeTeam = data[4].replace("\"", "");
-        this.visitorTeam = data[5].replace("\"", "");
-        this.homeTeamFormation = data[6].replace("\"", "");
-        this.visitorTeamFormation = data[7].replace("\"", "");
-        this.homeTeamCoach = data[8].replace("\"", "");
-        this.visitorTeamCoach = data[9].replace("\"", "");
-        this.winner = data[10].replace("\"", "");
-        this.stadium = data[11].replace("\"", "");
-        this.homeTeamScore = Integer.parseInt(data[12].replace("\"", ""));
-        this.visitorTeamScore = Integer.parseInt(data[13].replace("\"", ""));
-        this.homeTeamState = data[14].replace("\"", "");
-        this.visitorTeamState = data[15].replace("\"", "");
+        this.date = LocalDate.parse(data[2], formatter);
+        this.time = LocalTime.parse(data[3]);
+        this.homeTeam = data[4];
+        this.visitorTeam = data[5];
+        this.homeTeamFormation = data[6];
+        this.visitorTeamFormation = data[7];
+        this.homeTeamCoach = data[8];
+        this.visitorTeamCoach = data[9];
+        this.winner = data[10];
+        this.stadium = data[11];
+        this.homeTeamScore = Integer.parseInt(data[12]);
+        this.visitorTeamScore = Integer.parseInt(data[13]);
+        this.homeTeamState = data[14];
+        this.visitorTeamState = data[15];
 
         this.totalScore = this.homeTeamScore + this.visitorTeamScore;
     }
@@ -113,7 +113,7 @@ public class Match {
         return visitorTeamState;
     }
 
-    public int getTotalScore(){
+    public int getTotalScore() {
         return totalScore;
     }
 

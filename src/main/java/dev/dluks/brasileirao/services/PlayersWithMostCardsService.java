@@ -4,6 +4,7 @@ import dev.dluks.brasileirao.dtos.player.PlayersWithMostCards;
 import dev.dluks.brasileirao.dtos.player.PlayersWithMostCardsResponseDTO;
 import dev.dluks.brasileirao.entities.Card;
 import dev.dluks.brasileirao.exceptions.InvalidCardExpception;
+import dev.dluks.brasileirao.utils.SanitizeHelper;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,27 +20,27 @@ public class PlayersWithMostCardsService {
     private static final String FILE_PATH = "src/main/resources/dataset/campeonato-brasileiro-cartoes.csv";
 
     public static PlayersWithMostCardsResponseDTO execute(String colorCard) {
-        if(!colorCard.equalsIgnoreCase("vermelho") && !colorCard.equalsIgnoreCase("amarelo")){
+        if (!colorCard.equalsIgnoreCase("vermelho") && !colorCard.equalsIgnoreCase("amarelo")) {
             throw new InvalidCardExpception("O Cartão deve ser 'vermelho' ou 'amarelo'");
         }
 
         List<PlayersWithMostCards> players = new ArrayList<>();
-        try(Stream<String> lines = Files.lines(Paths.get(FILE_PATH))) {
+        try (Stream<String> lines = Files.lines(Paths.get(FILE_PATH))) {
 
             Map<String, Long> cardsPerPlayers = lines.skip(1)
-                .map(line -> new Card(line.split(",")))
-                .filter(card -> card.getCard().equalsIgnoreCase(colorCard))
-                .collect(Collectors.groupingBy(Card::getAthlete, Collectors.counting()));
+                    .map(line -> new Card(SanitizeHelper.sanitize(line.split(","))))
+                    .filter(card -> card.getCard().equalsIgnoreCase(colorCard))
+                    .collect(Collectors.groupingBy(Card::getAthlete, Collectors.counting()));
 
             Long maxCards = cardsPerPlayers.values().stream()
-                .max(Long::compareTo)
-                .orElse(0L);
+                    .max(Long::compareTo)
+                    .orElse(0L);
 
             cardsPerPlayers.entrySet().stream()
-                .filter(player -> player.getValue() == maxCards)
-                .forEach(player -> players.add(new PlayersWithMostCards(
-                        player.getKey(), player.getValue().intValue()
-                )));
+                    .filter(player -> player.getValue() == maxCards)
+                    .forEach(player -> players.add(new PlayersWithMostCards(
+                            player.getKey(), player.getValue().intValue()
+                    )));
 
         } catch (IOException e) {
             e.printStackTrace();

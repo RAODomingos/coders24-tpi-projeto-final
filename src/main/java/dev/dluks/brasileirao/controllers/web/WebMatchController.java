@@ -1,9 +1,7 @@
 package dev.dluks.brasileirao.controllers.web;
 
 import dev.dluks.brasileirao.dtos.game.MatchsWithHighestScoreResponseDTO;
-import dev.dluks.brasileirao.dtos.team.TeamsWithMostWinsInResponseDTO;
 import dev.dluks.brasileirao.services.MatchsWithHighestScoreService;
-import dev.dluks.brasileirao.services.TeamsWithMostWinsInYearService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +38,7 @@ public class WebMatchController {
             model.addAttribute("results", results);
             model.addAttribute("selectedYear", year);
         }
-        return "maiorplacar"; // Renderiza a mesma página com ou sem resultados
+        return "maiorplacar";
     }
 
 }

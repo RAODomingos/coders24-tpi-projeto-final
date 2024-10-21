@@ -30,7 +30,7 @@ public class WebGoalsController {
             model.addAttribute("results", results);
             model.addAttribute("type", type);
         }
-        return "maisgols"; // Renderiza a mesma página com ou sem resultados
+        return "maisgols";
     }
 
 }

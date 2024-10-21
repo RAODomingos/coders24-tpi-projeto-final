@@ -12,10 +12,9 @@ import java.util.List;
 @Controller
 public class WebTeamController {
 
-    @GetMapping("/web/jogos/mais-vitorias")
+    @GetMapping("/web/times/mais-vitorias")
     public String showMostWinsForm(@RequestParam(value = "year", required = false) String year, Model model) {
         if (year != null) {
-
             TeamsWithMostWinsInResponseDTO result = TeamsWithMostWinsInYearService.execute(year);
 
             if (result == null) {
@@ -30,7 +29,7 @@ public class WebTeamController {
             model.addAttribute("results", results);
             model.addAttribute("selectedYear", year);
         }
-        return "maisvitorias"; // Renderiza a mesma página com ou sem resultados
+        return "maisvitorias";
     }
 
 }
