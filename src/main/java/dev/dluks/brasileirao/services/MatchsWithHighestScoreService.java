@@ -4,6 +4,7 @@ import dev.dluks.brasileirao.dtos.game.MatchsWithHighestScore;
 import dev.dluks.brasileirao.dtos.game.MatchsWithHighestScoreResponseDTO;
 import dev.dluks.brasileirao.entities.Match;
 import dev.dluks.brasileirao.exceptions.InvalidYearException;
+import dev.dluks.brasileirao.utils.ParseYearHelper;
 import dev.dluks.brasileirao.utils.SanitizeHelper;
 
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class MatchsWithHighestScoreService {
     private static final String FILE_PATH = "src/main/resources/dataset/campeonato-brasileiro-full.csv";
 
     public static MatchsWithHighestScoreResponseDTO execute(String year) {
-        Optional<Integer> optionalYear = parseYear(year);
+        Optional<Integer> optionalYear = ParseYearHelper.parse(year);
 
         List<MatchsWithHighestScore> matchs = new ArrayList<>();
         try (Stream<String> lines = Files.lines(Paths.get(FILE_PATH))) {
@@ -60,17 +61,6 @@ public class MatchsWithHighestScoreService {
         }
 
         return new MatchsWithHighestScoreResponseDTO(matchs);
-
     }
 
-    public static Optional<Integer> parseYear(String year) {
-        if (year == null || year.isBlank()) {
-            return Optional.empty();
-        }
-        try {
-            return Optional.of(Integer.parseInt(year));
-        } catch (NumberFormatException e) {
-            throw new InvalidYearException("O ano deve ser um número inteiro entre 2003 e 2023.");
-        }
-    }
 }

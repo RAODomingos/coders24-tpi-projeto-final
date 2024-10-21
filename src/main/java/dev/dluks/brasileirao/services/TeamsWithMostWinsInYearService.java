@@ -4,6 +4,7 @@ import dev.dluks.brasileirao.dtos.team.TeamWithMostWins;
 import dev.dluks.brasileirao.dtos.team.TeamsWithMostWinsInResponseDTO;
 import dev.dluks.brasileirao.entities.Match;
 import dev.dluks.brasileirao.exceptions.InvalidYearException;
+import dev.dluks.brasileirao.utils.ParseYearHelper;
 import dev.dluks.brasileirao.utils.SanitizeHelper;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,7 @@ public class TeamsWithMostWinsInYearService {
     }
 
     public static TeamsWithMostWinsInResponseDTO execute(String year) {
-        Optional<Integer> optionalYear = parseYear(year);
+        Optional<Integer> optionalYear = ParseYearHelper.parse(year);
 
         if (optionalYear.isPresent() &&
                 (optionalYear.get() < 2003 || optionalYear.get() > 2023)
@@ -67,17 +68,6 @@ public class TeamsWithMostWinsInYearService {
         } catch (IOException e) {
             e.printStackTrace();
             return null;
-        }
-    }
-
-    private static Optional<Integer> parseYear(String year) {
-        if (year == null || year.isBlank()) {
-            return Optional.empty();
-        }
-        try {
-            return Optional.of(Integer.parseInt(year));
-        } catch (NumberFormatException e) {
-            throw new InvalidYearException("O ano deve ser um número inteiro entre 2003 e 2023.");
         }
     }
 
