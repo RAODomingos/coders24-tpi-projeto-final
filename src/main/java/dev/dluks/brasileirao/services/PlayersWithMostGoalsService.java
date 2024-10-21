@@ -15,6 +15,9 @@ import java.util.stream.Stream;
 
 public class PlayersWithMostGoalsService {
 
+    private PlayersWithMostGoalsService() {
+    }
+
     private static final String FILE_PATH = "src/main/resources/dataset/campeonato-brasileiro-gols.csv";
 
     public static PlayersWithMostGoalsResponseDTO execute(String typeGoals) {

@@ -66,7 +66,6 @@ public class CustomExceptionHandler {
 
     }
 
-
     @ExceptionHandler(Exception.class)
     public ResponseEntity<CustomErrorResponse> handleException(
             Exception e,
