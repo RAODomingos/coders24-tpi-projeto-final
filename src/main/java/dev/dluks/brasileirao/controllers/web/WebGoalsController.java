@@ -20,7 +20,7 @@ public class WebGoalsController {
 
             if (result == null) {
                 model.addAttribute("error", "An error occurred while fetching the data");
-                return "maisgols";
+                return "mais-gols";
             }
 
             List<Object[]> results = result.jogadores().stream()
@@ -30,7 +30,7 @@ public class WebGoalsController {
             model.addAttribute("results", results);
             model.addAttribute("type", type);
         }
-        return "maisgols";
+        return "mais-gols";
     }
 
 }

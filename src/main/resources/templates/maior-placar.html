@@ -5,7 +5,7 @@
     <meta name="keywords" content="Campeonato Brasileiro">
     <meta name="description" content="">
     <title>Santander Coders 2024 - TDI - Mais Gols</title>
-    <link rel="stylesheet" th:href="@{/css/nicepage.css}" media="screen">
+    <link rel="stylesheet" href="//abtro.com.br/coders/nicepage.css" media="screen">
     <link rel="stylesheet" th:href="@{/css/maisgols.css}" media="screen">
     <link rel="stylesheet" th:hrefxxxxxx="@{/css/page-2.css}" media="screen">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
@@ -25,25 +25,63 @@
           </div>
             <div class="u-custom-menu u-nav-container">
                 <ul class="u-nav u-unstyled u-nav-1">
-                    <li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" th:href="@{/web}" style="padding: 10px 20px;">Página Inicial</a>
-                    </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" th:href="@{/web/jogos/mais-vitorias}" style="padding: 10px 20px;">Mais Vitorias</a>
-                </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" th:href="@{/web/jogos/maior-placar}" style="padding: 10px 20px;">Maior Placar</a>
-                </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" th:href="@{/web/jogadores/mais-cartoes}" style="padding: 10px 20px;">Mais Cartões</a>
-                </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" th:href="@{/web/jogadores/mais-gols}" style="padding: 10px 20px;">Mais Gols</a>
-                </li><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" th:href="@{/swagger-ui/index.html#}" target="_blank" style="padding: 10px 20px;">API</a>
-                </li></ul>
+                    <li class="u-nav-item"><a
+                            class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                            th:href="@{/web}" style="padding: 10px 10px;">Página Inicial</a>
+                    </li>
+                    <li class="u-nav-item"><a
+                            class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                            th:href="@{/web/times/mais-vitorias}" style="padding: 10px 10px;">Mais Vitorias</a>
+                    </li>
+                    <li class="u-nav-item"><a
+                            class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                            th:href="@{/web/jogos/maior-placar}" style="padding: 10px 10px;">Maior Placar</a>
+                    </li>
+                    <li class="u-nav-item"><a
+                            class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                            th:href="@{/web/jogadores/mais-cartoes}" style="padding: 10px 10px;">Mais Cartões</a>
+                    </li>
+                    <li class="u-nav-item"><a
+                            class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                            th:href="@{/web/jogadores/mais-gols}" style="padding: 10px 10px;">Mais Gols</a>
+                    </li>
+                    <li class="u-nav-item"><a
+                            class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                            th:href="@{/web/estados/menos-jogos}" style="padding: 10px 10px;">Menos Jogos</a>
+                    </li>
+                    <li class="u-nav-item"><a
+                            class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                            th:href="@{/swagger-ui/index.html#}" target="_blank" style="padding: 10px 20px;">API</a>
+                    </li>
+                </ul>
             </div>
             <div class="u-custom-menu u-nav-container-collapse">
                 <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
                     <div class="u-inner-container-layout u-sidenav-overflow">
                         <div class="u-menu-close"></div>
-                        <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" th:href="@{/web/jogadores/mais-gols}">Página Inicial</a>
-                        </li><li class="u-nav-item"><a class="u-button-style u-nav-link" th:href="@{/web/jogos/mais-vitorias}">Mais Vitorias</a>
-                        </li><li class="u-nav-item"><a class="u-button-style u-nav-link" th:href="@{/web/jogadores/maior-placar}">Maior Placar</a>
-                        </li><li class="u-nav-item"><a class="u-button-style u-nav-link" th:href="@{/web/jogadores/mais-cartoes}">Mais Cartões</a>
-                        </li><li class="u-nav-item"><a class="u-button-style u-nav-link" th:href="@{/web/jogadores/mais-gols}">Mais Gols</a>
-                        </li><li class="u-nav-item"><a class="u-button-style u-nav-link" th:href="@{/swagger-ui/index.html#}" target="_blank">API</a>
-                        </li></ul>
+                        <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link" th:href="@{/web}">Página
+                                Inicial</a>
+                            </li>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                                                      th:href="@{/web/times/mais-vitorias}">Mais Vitorias</a>
+                            </li>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                                                      th:href="@{/web/jogadores/maior-placar}">Maior Placar</a>
+                            </li>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                                                      th:href="@{/web/jogadores/mais-cartoes}">Mais Cartões</a>
+                            </li>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                                                      th:href="@{/web/jogadores/mais-gols}">Mais Gols</a>
+                            </li>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                                                      th:href="@{/web/estados/menos-jogos}">Menos Jogos</a>
+                            </li>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                                                      th:href="@{/swagger-ui/index.html#}" target="_blank">API</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>

@@ -19,7 +19,7 @@ public class WebTeamController {
 
             if (result == null) {
                 model.addAttribute("error", "An error occurred while fetching the data");
-                return "maisvitorias";
+                return "mais-vitorias";
             }
 
             List<Object[]> results = result.times().stream()
@@ -29,7 +29,7 @@ public class WebTeamController {
             model.addAttribute("results", results);
             model.addAttribute("selectedYear", year);
         }
-        return "maisvitorias";
+        return "mais-vitorias";
     }
 
 }
