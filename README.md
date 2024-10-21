@@ -129,6 +129,13 @@ Siga os passos abaixo para clonar e executar o projeto localmente:
 
 Este projeto é distribuído sob a licença especificada no arquivo [LICENSE](LICENSE).
 
+## 🧑‍💻 Equipe
+
+| [<img src="https://github.com/dluks82.png" width="100" alt="Perfil do GitHub Diogo" />](https://github.com/dluks82) | [<img src="https://github.com/Isaquemz.png" width="100" alt="Perfil do GitHub Isaque" />](https://github.com/Isaquemz) | [<img src="https://github.com/RAODomingos.png" width="100" alt="Perfil do GitHub Rômulo" />](https://github.com/RAODomingos) |
+|:-------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------------:|
+| [Diogo Oliveira](https://github.com/dluks82)                                                                        | [Isaque Menezes](https://github.com/Isaquemz)                                                                          | [Rômulo Domingos](https://github.com/RAODomingos)                                                                         |
+
+
 ## 💬 Agradecimentos
 
 Gostaríamos de expressar nossa gratidão ao instrutor e colaboradores do **Santander Coders 2024.1**, cujo apoio foi
