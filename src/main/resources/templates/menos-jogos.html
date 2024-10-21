@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Consulta de Estados (Menos Jogos)</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        function checkFields() {
+            const startYear = document.getElementById("startYear").value;
+            const endYear = document.getElementById("endYear").value;
+            const submitButton = document.getElementById("submitButton");
+
+            submitButton.disabled = !(startYear !== "" && endYear !== "");
+        }
+
+        window.onload = function () {
+            document.getElementById("startYear").addEventListener("change", checkFields);
+            document.getElementById("endYear").addEventListener("change", checkFields);
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+    <h1>Selecione o período para ver o estado que sediou menos jogos</h1>
+
+    <form th:action="@{/web/estados/menos-jogos}" method="get">
+        <label for="startYear">Ano Início:</label>
+        <select id="startYear" name="anoInicio">
+            <option value="" disabled selected>Selecione um ano</option>
+            <option th:each="i : ${#numbers.sequence(2003, 2023)}"
+                    th:value="${i}"
+                    th:text="${i}"
+                    th:selected="${i} == ${selectedStartYear}">2003
+            </option>
+        </select>
+
+        <label for="endYear">Ano Fim:</label>
+        <select id="endYear" name="anoFim">
+            <option value="" disabled selected>Selecione um ano</option>
+            <option th:each="i : ${#numbers.sequence(2003, 2023)}"
+                    th:value="${i}"
+                    th:text="${i}"
+                    th:selected="${i} == ${selectedEndYear}">2003
+            </option>
+        </select>
+
+        <button type="submit" id="submitButton" disabled>Consultar</button>
+    </form>
+
+    <div th:if="${results != null}">
+        <h2>Resultado para o intervalo selecionado</h2>
+        <table>
+            <tr>
+                <th>Sigla</th>
+                <th>Total de Jogos</th>
+            </tr>
+            <tr th:each="result : ${results}">
+                <td th:text="${result[0]}">Estado</td>
+                <td th:text="${result[1]}">Quantidade de Jogos</td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>
