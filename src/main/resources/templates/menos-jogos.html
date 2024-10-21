@@ -5,13 +5,12 @@
     <meta charset="utf-8">
     <meta name="keywords" content="Campeonato Brasileiro">
     <meta name="description" content="">
-    <title>Santander Coders 2024 - TDI - Pagina Inicial</title>
+    <title>Santander Coders 2024 - TDI - Menos jogos</title>
     <link rel="stylesheet" th:href="@{/css/nicepage.css}" media="screen">
-    <link rel="stylesheet" th:href="@{/css/page-2.css}" media="screen">
-    <meta name="generator" content="Nicepage 6.19.6, nicepage.com">
+    <link rel="stylesheet" th:href="@{/css/maisgols.css}" media="screen">
+    <link rel="stylesheet" th:hrefxxxxxx="@{/css/page-2.css}" media="screen">
     <link id="u-theme-google-font" rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
-    <meta name="theme-color" content="#478ac9">
 
     <meta data-intl-tel-input-cdn-path="intlTelInput/">
 </head>
@@ -75,14 +74,14 @@
                     <div class="u-inner-container-layout u-sidenav-overflow">
                         <div class="u-menu-close"></div>
                         <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
-                            <li class="u-nav-item"><a class="u-button-style u-nav-link" th:href="@{/web}">Página
-                                Inicial</a>
+                            <li class="u-nav-item"><a class="u-button-style u-nav-link"
+                                                      th:href="@{/web/jogadores/mais-gols}">Página Inicial</a>
                             </li>
                             <li class="u-nav-item"><a class="u-button-style u-nav-link"
                                                       th:href="@{/web/times/mais-vitorias}">Mais Vitorias</a>
                             </li>
                             <li class="u-nav-item"><a class="u-button-style u-nav-link"
-                                                      th:href="@{/web/jogadores/maior-placar}">Maior Placar</a>
+                                                      th:href="@{/web/jogos/maior-placar}">Maior Placar</a>
                             </li>
                             <li class="u-nav-item"><a class="u-button-style u-nav-link"
                                                       th:href="@{/web/jogadores/mais-cartoes}">Mais Cartões</a>
@@ -118,14 +117,48 @@
          data-image-width="1280" data-image-height="853">
         <div class="u-container-layout u-container-layout-1">
             <div class="u-black u-container-style u-group u-opacity u-opacity-75 u-shape-rectangle u-group-2">
-                <div class="u-container-layout u-container-layout-2">
-                    <h5 class="u-align-center u-text u-text-white u-text-1">Projeto de tecnicas de desenvolvimento
-                        I </h5>
-                    <h2 class="u-align-center u-text u-text-body-alt-color u-text-default u-text-2">Campeonato
-                        Brasileiro</h2>
-                    <p class="u-align-center u-text u-text-body-alt-color u-text-3">Projeto de Analise de Dados em JAVA.<br>Foi
-                        utilizado programação funcional, Streams, Leitura de arquivo com File.&nbsp;
-                    </p>
+                <div class="u-container-layout u-valign-top u-container-layout-2">
+                    <div class="u-align-center u-form u-form-1">
+                        <form th:action="@{/web/estados/menos-jogos}" method="get"
+                              class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form">
+                            <div class="u-form-group u-form-select u-label-top u-form-group-1">
+                                <label for="startYear" class="u-label u-label-1">Ano Início</label>
+                                <div class="u-form-select-wrapper">
+                                    <select id="startYear" name="anoInicio">
+                                            class="u-input u-input-rectangle">
+                                        <option value="" disabled selected>Selecione um ano</option>
+                                        <option th:each="i : ${#numbers.sequence(2003, 2023)}"
+                                                th:value="${i}"
+                                                th:text="${i}"
+                                                th:selected="${i} == ${selectedStartYear}">2003
+                                        </option>
+                                    </select>
+                                    <svg class="u-caret u-caret-svg" version="1.1" id="Layer_1"
+                                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                         x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16"
+                                         style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="u-align-center u-table u-table-responsive u-table-1">
+                        <table class="u-table-entity">
+                            <colgroup>
+                                <col width="50%">
+                                <col width="50%">
+                            </colgroup>
+                            <tbody class="u-table-body">
+                            <tr style="height: 30px;">
+                                <td class="u-palette-1-base u-table-cell u-table-cell-1">Estado</td>
+                                <td class="u-palette-1-base u-table-cell u-table-cell-2">Jogos</td>
+                            </tr>
+                            <tr style="height: 47px;" th:each="result : ${results}">
+                                <td class="u-table-cell u-white u-table-cell-3" th:text="${result[0]}"></td>
+                                <td class="u-table-cell u-white u-table-cell-4" th:text="${result[1]}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -137,9 +170,9 @@
     <div class="u-clearfix u-sheet u-sheet-1">
         <p class="u-small-text u-text u-text-variant u-text-1">Desenvolvido por </br> Diogo Oliveira | Isaque Menezes |
             Rômulo Domingos</p>
+
     </div>
 </footer>
-
 
 </body>
 </html>
