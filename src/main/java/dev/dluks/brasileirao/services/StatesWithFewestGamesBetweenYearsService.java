@@ -4,6 +4,7 @@ import dev.dluks.brasileirao.dtos.state.StateWithFewestGames;
 import dev.dluks.brasileirao.dtos.state.StatesWithFewestGamesResponseDTO;
 import dev.dluks.brasileirao.entities.Match;
 import dev.dluks.brasileirao.exceptions.InvalidYearException;
+import dev.dluks.brasileirao.utils.ParseYearHelper;
 import dev.dluks.brasileirao.utils.SanitizeHelper;
 
 import java.io.IOException;
@@ -25,8 +26,8 @@ public class StatesWithFewestGamesBetweenYearsService {
 
     public static StatesWithFewestGamesResponseDTO execute(String sYear, String eYear) {
 
-        Optional<Integer> startYear = parseYear(sYear);
-        Optional<Integer> endYear = parseYear(eYear);
+        Optional<Integer> startYear = ParseYearHelper.parse(sYear);
+        Optional<Integer> endYear = ParseYearHelper.parse(eYear);
 
         if (startYear.isEmpty() || endYear.isEmpty()) {
             throw new InvalidYearException("Os anos de início e fim são obrigatórios");
@@ -73,15 +74,4 @@ public class StatesWithFewestGamesBetweenYearsService {
         }
     }
 
-    private static Optional<Integer> parseYear(String year) {
-        if (year == null || year.isBlank()) {
-            return Optional.empty();
-        }
-
-        try {
-            return Optional.of(Integer.parseInt(year));
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(String.format("O ano %s é inválido", year));
-        }
-    }
 }
