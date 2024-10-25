@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 @Service
 public class TeamsWithMostWinsInYearService {
 
-    private final String FILE_PATH = "src/main/resources/dataset/campeonato-brasileiro-full.csv";
+    private static final String FILE_PATH = "src/main/resources/dataset/campeonato-brasileiro-full.csv";
 
     public TeamsWithMostWinsInResponseDTO execute() {
         return execute("");

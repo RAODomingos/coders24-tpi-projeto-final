@@ -5,6 +5,7 @@ import dev.dluks.brasileirao.dtos.game.MatchesWithHighestScoreResponseDTO;
 import dev.dluks.brasileirao.entities.Match;
 import dev.dluks.brasileirao.utils.ParseYearHelper;
 import dev.dluks.brasileirao.utils.SanitizeHelper;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,14 +17,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Service
 public class MatchesWithHighestScoreService {
-
-    private MatchesWithHighestScoreService() {
-    }
 
     private static final String FILE_PATH = "src/main/resources/dataset/campeonato-brasileiro-full.csv";
 
-    public static MatchesWithHighestScoreResponseDTO execute(String year) {
+    public MatchesWithHighestScoreResponseDTO execute(String year) {
         Optional<Integer> optionalYear = ParseYearHelper.parse(year);
 
         List<MatchesWithHighestScore> matches = new ArrayList<>();
