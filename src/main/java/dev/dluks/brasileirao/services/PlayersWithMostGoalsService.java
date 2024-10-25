@@ -5,6 +5,7 @@ import dev.dluks.brasileirao.dtos.player.PlayersWithMostGoalsResponseDTO;
 import dev.dluks.brasileirao.entities.Goal;
 import dev.dluks.brasileirao.exceptions.InvalidGoalTypeException;
 import dev.dluks.brasileirao.utils.SanitizeHelper;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,14 +14,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Service
 public class PlayersWithMostGoalsService {
-
-    private PlayersWithMostGoalsService() {
-    }
 
     private static final String FILE_PATH = "src/main/resources/dataset/campeonato-brasileiro-gols.csv";
 
-    public static PlayersWithMostGoalsResponseDTO execute(String typeGoals) {
+    public PlayersWithMostGoalsResponseDTO execute(String typeGoals) {
         if (!typeGoals.equalsIgnoreCase("contra") && !typeGoals.equalsIgnoreCase("penalti") && !typeGoals.equalsIgnoreCase("todos")) {
             throw new InvalidGoalTypeException("Utilize 'contra' para Gol Contra e 'penalti' para Penalty ou 'todos' para todos os tipos de gols");
         }
