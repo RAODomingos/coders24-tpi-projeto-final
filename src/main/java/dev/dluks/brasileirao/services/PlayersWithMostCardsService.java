@@ -5,6 +5,7 @@ import dev.dluks.brasileirao.dtos.player.PlayersWithMostCardsResponseDTO;
 import dev.dluks.brasileirao.entities.Card;
 import dev.dluks.brasileirao.exceptions.InvalidCardExpception;
 import dev.dluks.brasileirao.utils.SanitizeHelper;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -15,14 +16,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Service
 public class PlayersWithMostCardsService {
-
-    private PlayersWithMostCardsService() {
-    }
 
     private static final String FILE_PATH = "src/main/resources/dataset/campeonato-brasileiro-cartoes.csv";
 
-    public static PlayersWithMostCardsResponseDTO execute(String colorCard) {
+    public PlayersWithMostCardsResponseDTO execute(String colorCard) {
         if (!colorCard.equalsIgnoreCase("vermelho") && !colorCard.equalsIgnoreCase("amarelo")) {
             throw new InvalidCardExpception("O Cartão deve ser 'vermelho' ou 'amarelo'");
         }
