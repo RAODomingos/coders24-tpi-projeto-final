@@ -20,16 +20,13 @@ import java.util.stream.Stream;
 @Service
 public class TeamsWithMostWinsInYearService {
 
-    private TeamsWithMostWinsInYearService() {
-    }
+    private final String FILE_PATH = "src/main/resources/dataset/campeonato-brasileiro-full.csv";
 
-    private static final String FILE_PATH = "src/main/resources/dataset/campeonato-brasileiro-full.csv";
-
-    public static TeamsWithMostWinsInResponseDTO execute() {
+    public TeamsWithMostWinsInResponseDTO execute() {
         return execute("");
     }
 
-    public static TeamsWithMostWinsInResponseDTO execute(String year) {
+    public TeamsWithMostWinsInResponseDTO execute(String year) {
         Optional<Integer> optionalYear = ParseYearHelper.parse(year);
 
         if (optionalYear.isPresent() &&
