@@ -12,6 +12,12 @@ import java.util.List;
 @Controller
 public class WebStateController {
 
+    private final StatesWithFewestGamesBetweenYearsService service;
+
+    public WebStateController(StatesWithFewestGamesBetweenYearsService service) {
+        this.service = service;
+    }
+
     @GetMapping("/web/estados/menos-jogos")
     public String showMostWinsForm(
             @RequestParam(name = "anoInicio", required = false) String startYear,
@@ -20,7 +26,7 @@ public class WebStateController {
 
         if (startYear != null && endYear != null) {
             StatesWithFewestGamesResponseDTO result =
-                    StatesWithFewestGamesBetweenYearsService.execute(startYear, endYear);
+                    service.execute(startYear, endYear);
 
             if (result == null) {
                 model.addAttribute("error", "An error occurred while fetching the data");

@@ -6,6 +6,7 @@ import dev.dluks.brasileirao.entities.Match;
 import dev.dluks.brasileirao.exceptions.InvalidYearException;
 import dev.dluks.brasileirao.utils.ParseYearHelper;
 import dev.dluks.brasileirao.utils.SanitizeHelper;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,14 +18,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Service
 public class StatesWithFewestGamesBetweenYearsService {
 
     private static final String FILE_PATH = "src/main/resources/dataset/campeonato-brasileiro-full.csv";
 
-    private StatesWithFewestGamesBetweenYearsService() {
-    }
-
-    public static StatesWithFewestGamesResponseDTO execute(String sYear, String eYear) {
+    public StatesWithFewestGamesResponseDTO execute(String sYear, String eYear) {
 
         Optional<Integer> startYear = ParseYearHelper.parse(sYear);
         Optional<Integer> endYear = ParseYearHelper.parse(eYear);
