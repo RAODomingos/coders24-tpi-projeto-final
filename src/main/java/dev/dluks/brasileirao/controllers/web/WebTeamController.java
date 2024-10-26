@@ -12,10 +12,16 @@ import java.util.List;
 @Controller
 public class WebTeamController {
 
+    private final TeamsWithMostWinsInYearService service;
+
+    public WebTeamController(TeamsWithMostWinsInYearService teamsWithMostWinsInYearService) {
+        service = teamsWithMostWinsInYearService;
+    }
+
     @GetMapping("/web/times/mais-vitorias")
     public String showMostWinsForm(@RequestParam(value = "year", required = false) String year, Model model) {
         if (year != null) {
-            TeamsWithMostWinsInResponseDTO result = TeamsWithMostWinsInYearService.execute(year);
+            TeamsWithMostWinsInResponseDTO result = service.execute(year);
 
             if (result == null) {
                 model.addAttribute("error", "An error occurred while fetching the data");

@@ -12,9 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/jogadores")
 public class CardsController {
 
+    private final PlayersWithMostCardsService service;
+
+    public CardsController(PlayersWithMostCardsService service) {
+        this.service = service;
+    }
+
     @GetMapping("/mais-cartoes/{colorCard}")
     public ResponseEntity<PlayersWithMostCardsResponseDTO> getPlayersWithMostCards(@PathVariable String colorCard) {
-        PlayersWithMostCardsResponseDTO result = PlayersWithMostCardsService.execute(colorCard);
+        PlayersWithMostCardsResponseDTO result = service.execute(colorCard);
         return ResponseEntity.ok(result);
     }
 

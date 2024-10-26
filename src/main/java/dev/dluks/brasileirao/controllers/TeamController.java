@@ -12,9 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/times/mais-vitorias")
 public class TeamController {
 
+    private final TeamsWithMostWinsInYearService service;
+
+    public TeamController(TeamsWithMostWinsInYearService service) {
+        this.service = service;
+    }
+
     @GetMapping("/")
     public ResponseEntity<TeamsWithMostWinsInResponseDTO> getTeamsWithMostWinsInYear() {
-        TeamsWithMostWinsInResponseDTO result = TeamsWithMostWinsInYearService.execute();
+        TeamsWithMostWinsInResponseDTO result = service.execute();
         return ResponseEntity.ok(result);
     }
 
@@ -22,7 +28,7 @@ public class TeamController {
     public ResponseEntity<TeamsWithMostWinsInResponseDTO> getTeamsWithMostWinsInYear(
             @PathVariable("year") String year
     ) {
-        TeamsWithMostWinsInResponseDTO result = TeamsWithMostWinsInYearService.execute(year);
+        TeamsWithMostWinsInResponseDTO result = service.execute(year);
         return ResponseEntity.ok(result);
     }
 

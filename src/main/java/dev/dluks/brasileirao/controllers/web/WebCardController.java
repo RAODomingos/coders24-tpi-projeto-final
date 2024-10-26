@@ -12,11 +12,17 @@ import java.util.List;
 @Controller
 public class WebCardController {
 
+    private final PlayersWithMostCardsService service;
+
+    public WebCardController(PlayersWithMostCardsService service) {
+        this.service = service;
+    }
+
     @GetMapping("/web/jogadores/mais-cartoes")
     public String showMostCardsForm(@RequestParam(value = "type", required = false) String type, Model model) {
         if (type != null) {
 
-            PlayersWithMostCardsResponseDTO result = PlayersWithMostCardsService.execute(type);
+            PlayersWithMostCardsResponseDTO result = service.execute(type);
 
             if (result == null) {
                 model.addAttribute("error", "An error occurred while fetching the data");

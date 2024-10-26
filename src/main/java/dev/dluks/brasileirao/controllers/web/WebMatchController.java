@@ -12,11 +12,17 @@ import java.util.List;
 @Controller
 public class WebMatchController {
 
+    private final MatchesWithHighestScoreService service;
+
+    public WebMatchController(MatchesWithHighestScoreService service) {
+        this.service = service;
+    }
+
     @GetMapping("/web/jogos/maior-placar")
     public String showMostWinsForm(@RequestParam(value = "year", required = false) String year, Model model) {
         if (year != null) {
 
-            MatchesWithHighestScoreResponseDTO result = MatchesWithHighestScoreService.execute(year);
+            MatchesWithHighestScoreResponseDTO result = service.execute(year);
 
             if (result == null) {
                 model.addAttribute("error", "An error occurred while fetching the data");

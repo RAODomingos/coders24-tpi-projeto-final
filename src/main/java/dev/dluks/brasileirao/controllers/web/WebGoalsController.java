@@ -12,11 +12,17 @@ import java.util.List;
 @Controller
 public class WebGoalsController {
 
+    private final PlayersWithMostGoalsService service;
+
+    public WebGoalsController(PlayersWithMostGoalsService service) {
+        this.service = service;
+    }
+
     @GetMapping("/web/jogadores/mais-gols")
     public String showMostGoalsForm(@RequestParam(value = "type", required = false) String type, Model model) {
         if (type != null) {
 
-            PlayersWithMostGoalsResponseDTO result = PlayersWithMostGoalsService.execute(type);
+            PlayersWithMostGoalsResponseDTO result = service.execute(type);
 
             if (result == null) {
                 model.addAttribute("error", "An error occurred while fetching the data");

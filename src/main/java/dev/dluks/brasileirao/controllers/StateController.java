@@ -11,13 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/estados/menos-jogos")
 public class StateController {
 
+    private final StatesWithFewestGamesBetweenYearsService service;
+
+    public StateController(StatesWithFewestGamesBetweenYearsService service) {
+        this.service = service;
+    }
+
     @GetMapping()
     public StatesWithFewestGamesResponseDTO getStatesWithFewestGamesBetweenYears(
             @RequestParam(name = "anoInicio", defaultValue = "") String startYear,
             @RequestParam(name = "anoFim", defaultValue = "") String endYear
     ) {
 
-        return StatesWithFewestGamesBetweenYearsService.execute(startYear, endYear);
+        return service.execute(startYear, endYear);
 
     }
 
